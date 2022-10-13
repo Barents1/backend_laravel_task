@@ -22,13 +22,13 @@ use App\Http\Controllers\TaskController;
 
 
 //rutas publicas
-Route::post('/login', [UserController::class, 'authenticate']);
-Route::post('/register', [UserController::class, 'store']);
-// Route::get('/user', [UserController::class, 'index']);
-// Route::get('/user', [UserController::class, 'show']);
-// Route::get('/task', [TaskController::class, 'index']);
-// Route::post('/task', [TaskController::class, 'store']);
 
+// ruta para iniciar sesion
+Route::post('/login', [UserController::class, 'authenticate']);
+// ruta para rgistrar un nuevo usuario
+Route::post('/register', [UserController::class, 'store']);
+
+//rutas protegidas que obliga al usuario a iniciar sesion
 Route::group(['middleware' => ['jwt.verify']], function(){
     //rutas para la entidad User
     Route::get('/user', [UserController::class, 'getAuthenticatedUser']);
@@ -39,9 +39,14 @@ Route::group(['middleware' => ['jwt.verify']], function(){
 
 
     //rutas para la entidad Task
+    // ruta que lee todas las tareas
     Route::get('/task', [TaskController::class, 'index']);
+    // ruta para ver una tarea esoecifica
     Route::get('/task/{id}', [TaskController::class, 'show']);
+    // ruta para el registro de una tarea
     Route::post('/task', [TaskController::class, 'store']);
+    // ruta para actualizar una tarea
     Route::put('/task/{id}', [TaskController::class, 'update']);
+    // ruta para eliminar una tarea
     Route::delete('/task/{id}', [TaskController::class, 'delete']);
 });

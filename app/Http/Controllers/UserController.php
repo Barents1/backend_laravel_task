@@ -44,11 +44,6 @@ class UserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        // validamos que las contraseñas sean iguales
-        // if ($request->get('password' != $request->get('verifiedpassword'))) {
-        //     return response()->json(['Las contraseñas no coinciden']);
-        // }
-
         // obtención de los datos enviados del frontEnd
         $user = User::create([
             'identification' => $request->get('identification'),
@@ -98,10 +93,6 @@ class UserController extends Controller
     // método para vertificar las credencialesde un usuario
     public function authenticate(Request $request)
     {
-        // print_r('llega');
-        // print_r($request->only('email', 'password'));
-        // print_r($request->password);
-        // print_r('hola');
         // optención de los datos enviados
         $credentials = $request->only('email', 'password');
         $credentials2 = $this->userSearch($request);

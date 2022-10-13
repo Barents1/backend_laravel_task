@@ -13,6 +13,7 @@ class TaskController extends Controller
     public function index()
     {
         try {
+            // consulta de todas las tareas
             $result = Task::all();
             
         } catch (Exception $e) {
@@ -38,6 +39,7 @@ class TaskController extends Controller
                 return response()->json($validator->errors()->toJson(),400);
 
             }
+            // función que facilita la creación de la tarea
             Task::create([
                 'description' => $request->get('description'),
                 'finish' => $request->get('finish'),
@@ -74,6 +76,7 @@ class TaskController extends Controller
     {
 
         try {
+            // consulta una tarea especifica de la entidad de tarea
             $result =  Task::where('id',$id)->first();;
             if ($result == null) {
                 return response()->json(['No se encontro ningun registro con ese Id para la eliminación'],404);
@@ -88,7 +91,7 @@ class TaskController extends Controller
     }
 
 
-    // método para buscar una tarea en especifica 
+    // método para buscar una tarea en especifica segun el id del usuario
     public function show($id)
     {
         return Task::where('user_id', $id)->get();

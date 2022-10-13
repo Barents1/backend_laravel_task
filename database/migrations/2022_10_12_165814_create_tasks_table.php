@@ -17,8 +17,9 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->text('description');
             $table->string('finish',15);
-
-            $table->unsignedBigInteger('user_id')->nullable();      // campo para la clave foranea de users
+            
+            // campo para la clave foranea de users
+            $table->unsignedBigInteger('user_id')->nullable();      
 
             // clave foranea que hace referencia a la tabla de users
             $table->foreign('user_id')->references('id')->on('users')->onDelete('Cascade');

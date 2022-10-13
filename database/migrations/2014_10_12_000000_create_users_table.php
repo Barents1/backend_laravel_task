@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // esquema para generar la entidad usser con sus respectivos atributos
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('identification',15);
@@ -33,6 +34,7 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
+    // función para eliminar si existe la table de users
     public function down()
     {
         Schema::dropIfExists('users');
